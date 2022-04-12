@@ -7,20 +7,10 @@ namespace myonAPI.Services
     public class ArticleService : IArticleService
     {
         private string articlesPath = "./Assets/Articles";
-        private string indexFilePath = "./Assets/Articles/Index.json";
-        private HashSet<ArticleInfo> articles;
+        private HashSet<ArticleInfo> articles = new();
 
         public ArticleService()
         {
-            if (!File.Exists(indexFilePath))
-            {
-                using FileStream fs = File.Create(indexFilePath);
-                var initByte = new UTF8Encoding(true).GetBytes("[]");
-                fs.Write(initByte, 0, initByte.Length);
-            }
-            using FileStream indexFile = File.OpenRead(indexFilePath);
-            articles = JsonSerializer.Deserialize<HashSet<ArticleInfo>>(indexFile) ?? new();
-
             var titles = articles.Select(info => info.Title).ToList();
             var filenames = Directory.EnumerateFiles(articlesPath, "*.md").Select(Path.GetFileNameWithoutExtension).ToList();
 
@@ -51,11 +41,13 @@ namespace myonAPI.Services
         public bool Create(ArticleInfo articleInfo)
         {
             if (articles.Where(info => info.Title == articleInfo.Title).Any())
+            {
                 return false;
+            }
 
             if (string.IsNullOrEmpty(articleInfo.Content))
             {
-                articleInfo.Content = File.ReadAllText(Path.Join(articlesPath, articleInfo.Title));
+                articleInfo.Content = File.ReadAllText(Path.Join(articlesPath, articleInfo.Title + ".md"));
             }
 
             return articles.Add(articleInfo);
@@ -96,11 +88,8 @@ namespace myonAPI.Services
             {
                 return false;
             }
-            else
-            {
-                Remove(articleInfo);
-            }
-
+            
+            Remove(articleInfo);
             return articles.Add(articleInfo);
         }
 
