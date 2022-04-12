@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "myonAPI", "myonAPI.csproj", "{83683E8A-C00B-40C5-8D28-20E6B9A4D39A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "myonAPI", "myonAPI.csproj", "{C7BAE888-3FA9-443D-8782-A1717AD8929E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{83683E8A-C00B-40C5-8D28-20E6B9A4D39A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{83683E8A-C00B-40C5-8D28-20E6B9A4D39A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{83683E8A-C00B-40C5-8D28-20E6B9A4D39A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{83683E8A-C00B-40C5-8D28-20E6B9A4D39A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7BAE888-3FA9-443D-8782-A1717AD8929E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7BAE888-3FA9-443D-8782-A1717AD8929E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7BAE888-3FA9-443D-8782-A1717AD8929E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7BAE888-3FA9-443D-8782-A1717AD8929E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {94F0E6C5-39D7-4CB3-9D1A-181234B44C2A}
+		SolutionGuid = {6C236EB2-6D7D-4FD8-92CB-AC49601EB512}
 	EndGlobalSection
 EndGlobal
