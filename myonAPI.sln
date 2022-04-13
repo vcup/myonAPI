@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "myonAPI", "myonAPI.csproj", "{C7BAE888-3FA9-443D-8782-A1717AD8929E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "myonAPI", "src\myonAPI.csproj", "{C7BAE888-3FA9-443D-8782-A1717AD8929E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "myonAPI.Test", "test\myonAPI.Test.csproj", "{E4BB6200-2AC3-48A9-A582-9E418288B298}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{C7BAE888-3FA9-443D-8782-A1717AD8929E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C7BAE888-3FA9-443D-8782-A1717AD8929E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C7BAE888-3FA9-443D-8782-A1717AD8929E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4BB6200-2AC3-48A9-A582-9E418288B298}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4BB6200-2AC3-48A9-A582-9E418288B298}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4BB6200-2AC3-48A9-A582-9E418288B298}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4BB6200-2AC3-48A9-A582-9E418288B298}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
