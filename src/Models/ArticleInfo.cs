@@ -1,6 +1,6 @@
 ﻿namespace myonAPI.Models;
 
-internal class ArticleInfo
+public class ArticleInfo
 {
     public string Title { get; set; } = "";
 

@@ -8,7 +8,7 @@ namespace myonAPI.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-internal class ArticlesController : ControllerBase
+public class ArticlesController : ControllerBase
 {
     private readonly IArticleService _service;
 
