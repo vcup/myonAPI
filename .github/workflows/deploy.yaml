@@ -1,0 +1,23 @@
+name: Deploy to vcup.moe
+on: [push]
+jobs:
+  Deploy-Actions:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: 6.0.x
+      - run: dotnet test
+      - run: dotnet publish ./src/myonAPI.csproj --nologo -o ./myonAPI
+      - run: mv src/Assets ./myonAPI
+      - run: zip -r myonApi.zip myonAPI/
+      - name: Deploy to Server
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.ACCESS_TOKEN }}
+          ARGS: "-rltgoDzvO --delete"
+          SOURCE: "myonApi.zip"
+          REMOTE_HOST: vcup.moe
+          REMOTE_USER: ${{ secrets.REMOTE_USER }}
+          TARGET: ~/
