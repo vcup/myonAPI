@@ -1,4 +1,5 @@
-﻿using Markdig;
+﻿using System.Text;
+using Markdig;
 using Markdig.Parsers;
 using Markdig.Renderers;
 using Markdig.Renderers.Html;
@@ -73,23 +74,36 @@ internal class AutoIdExtension : IMarkdownExtension
             sectionNOs.TryAdd(level, 0);
             sectionNOs[headingBlock.Level]++;
 
-            var headingId = "";
+            var stringBuilder = new StringBuilder();
             while (level > 0)
             {
                 sectionNOs.TryGetValue(level, out var lastSectionNo);
-                headingId = string.IsNullOrEmpty(headingId) ? lastSectionNo.ToString() : $"{lastSectionNo}-{headingId}";
+                stringBuilder.Insert(0, lastSectionNo.ToString() + '-');
                 level--;
             }
 
             #endregion
 
             if ((_parent._option & AutoIdExtensionOption.UseAutoPrefix) != 0 && _parent.Prefix is not null)
-                headingId = $"{_parent.Prefix}-{headingId}";
+            {
+                stringBuilder.Insert(0, '-').Insert(0, _parent.Prefix);
+            }
 
-            if ((_parent._option & AutoIdExtensionOption.UseOriginalId) != 0)
-                headingId = $"{headingId}-{attributes.Id}";
+            if ((_parent._option & AutoIdExtensionOption.UseOriginalId) != 0
+                && attributes.Id is not null)
+            {
+                var tmp = attributes.Id.Split('-');
+                if (tmp.Length > 1)
+                {
+                    stringBuilder.AppendJoin('-', attributes.Id.Split('-').SkipLast(1));
+                }
+                else
+                {
+                    stringBuilder.Append(attributes.Id);
+                }
+            }
 
-            _parent.WhenSetId?.Invoke(attributes.Id = headingId, _heading);
+            _parent.WhenSetId?.Invoke(attributes.Id = stringBuilder.ToString(), _heading);
         }
     }
 
