@@ -12,6 +12,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddSingleton<IArticleService, ArticleService>();
+builder.Services.AddSingleton<UniqueNumberService>();
+builder.Services.AddTransient<MarkdownParserService>();
 
 var app = builder.Build();
 

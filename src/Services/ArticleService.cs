@@ -1,18 +1,25 @@
-﻿using myonAPI.Models;
+﻿using System.Diagnostics;
+using myonAPI.Models;
 
 namespace myonAPI.Services;
 
 internal class ArticleService : IArticleService
 {
+    private readonly MarkdownParserService _service;
     private readonly string articlesPath = "./Assets/Articles";
     private readonly HashSet<ArticleInfo> _articles = new();
 
-    public ArticleService()
+    public ArticleService(MarkdownParserService service)
     {
+        _service = service;
         var titles = _articles.Select(info => info.Title).ToList();
         var filenames = Directory.EnumerateFiles(articlesPath, "*.md").Select(Path.GetFileNameWithoutExtension).ToList();
 
-        var results = filenames.Except(titles).Select(Create!).ToList();
+        // Create all markdown article on filesystem to .net object
+        var result = filenames.Except(titles)
+            .Select(Create!)
+            .All(result => result);
+        Debug.Assert(result);
     }
 
     public int Count => _articles.Count;
@@ -33,7 +40,8 @@ internal class ArticleService : IArticleService
         var article = new ArticleInfo
         {
             Title = title,
-            Content = File.ReadAllText(articleFilePath)
+            Content = _service.GetHtml(articleFilePath),
+            HtmlHeadingIdRelation = _service.MarkdownHeadings
         };
 
         return Create(article);
@@ -81,11 +89,7 @@ internal class ArticleService : IArticleService
 
     public bool Update(ArticleInfo articleInfo)
     {
-        if (!_articles.Any(info => info.Title == articleInfo.Title)) 
-        {
-            return false;
-        }
-        else if (!_articles.Any(info => info.Content == articleInfo.Content)) 
+        if (!_articles.Any(info => info == articleInfo)) 
         {
             return false;
         }
