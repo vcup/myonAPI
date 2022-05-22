@@ -1,110 +1,106 @@
 ﻿using myonAPI.Models;
-using System.Text.Json;
-using System.Text;
 
-namespace myonAPI.Services
+namespace myonAPI.Services;
+
+internal class ArticleService : IArticleService
 {
-    public class ArticleService : IArticleService
+    private readonly string articlesPath = "./Assets/Articles";
+    private readonly HashSet<ArticleInfo> _articles = new();
+
+    public ArticleService()
     {
-        private string articlesPath = "./Assets/Articles";
-        private HashSet<ArticleInfo> articles = new();
+        var titles = _articles.Select(info => info.Title).ToList();
+        var filenames = Directory.EnumerateFiles(articlesPath, "*.md").Select(Path.GetFileNameWithoutExtension).ToList();
 
-        public ArticleService()
+        var results = filenames.Except(titles).Select(Create!).ToList();
+    }
+
+    public int Count => _articles.Count;
+
+    public bool Create(string title)
+    {
+        if (string.IsNullOrEmpty(title))
         {
-            var titles = articles.Select(info => info.Title).ToList();
-            var filenames = Directory.EnumerateFiles(articlesPath, "*.md").Select(Path.GetFileNameWithoutExtension).ToList();
-
-            var results = filenames.Except(titles).Select(Create!).ToList();
+            return false;
         }
-
-        public int Count => articles.Count;
-
-        public bool Create(string title)
-        {
-            if (string.IsNullOrEmpty(title))
-            {
-                return false;
-            }
             
-            var articleFilePath = Path.Join(articlesPath, title + ".md");
-            if (!File.Exists(articleFilePath))
-            {
-                return false;
-            }
-
-            ArticleInfo article = new(title);
-            article.Content = File.ReadAllText(articleFilePath);
-
-            return Create(article);
+        var articleFilePath = Path.Join(articlesPath, title + ".md");
+        if (!File.Exists(articleFilePath))
+        {
+            return false;
         }
 
-        public bool Create(ArticleInfo articleInfo)
+        var article = new ArticleInfo
         {
-            if (articles.Where(info => info.Title == articleInfo.Title).Any())
-            {
-                return false;
-            }
+            Title = title,
+            Content = File.ReadAllText(articleFilePath)
+        };
 
-            if (string.IsNullOrEmpty(articleInfo.Content))
-            {
-                articleInfo.Content = File.ReadAllText(Path.Join(articlesPath, articleInfo.Title + ".md"));
-            }
+        return Create(article);
+    }
 
-            return articles.Add(articleInfo);
-        }
-        public IEnumerable<ArticleInfo> Get()
+    public bool Create(ArticleInfo articleInfo)
+    {
+        if (_articles.Any(info => info.Title == articleInfo.Title))
         {
-            return articles;
+            return false;
         }
 
-        public ArticleInfo? Get(string title)
+        if (string.IsNullOrEmpty(articleInfo.Content))
         {
-            return articles.FirstOrDefault(info => info.Title == title);
+            articleInfo.Content = File.ReadAllText(Path.Join(articlesPath, articleInfo.Title + ".md"));
         }
 
-        public ArticleInfo? Get(ArticleInfo articleInfo)
+        return _articles.Add(articleInfo);
+    }
+    public IEnumerable<ArticleInfo> Get()
+    {
+        return _articles;
+    }
+
+    public ArticleInfo? Get(string title)
+    {
+        return _articles.FirstOrDefault(info => info.Title == title);
+    }
+
+    public ArticleInfo? Get(ArticleInfo articleInfo)
+    {
+        return Get(articleInfo.Title);
+    }
+
+
+    public bool Remove(string title)
+    {
+        return _articles.RemoveWhere(info => info.Title == title) != 0;
+    }
+
+    public bool Remove(ArticleInfo articleInfo)
+    {
+        return Remove(articleInfo.Title);
+    }
+
+    public bool Update(ArticleInfo articleInfo)
+    {
+        if (!_articles.Any(info => info.Title == articleInfo.Title)) 
         {
-            return Get(articleInfo.Title);
+            return false;
         }
-
-
-        public bool Remove(string title)
+        else if (!_articles.Any(info => info.Content == articleInfo.Content)) 
         {
-            return articles.RemoveWhere(info => info.Title == title) != 0;
+            return false;
         }
-
-        public bool Remove(ArticleInfo articleInfo)
-        {
-            return Remove(articleInfo.Title);
-        }
-
-        public bool Update(ArticleInfo articleInfo)
-        {
-            if (!articles.Where(info => info.Title == articleInfo.Title).Any()) 
-            {
-                return false;
-            }
-            else if (!articles.Where(info => info.Content == articleInfo.Content).Any()) 
-            {
-                return false;
-            }
             
-            Remove(articleInfo);
-            return articles.Add(articleInfo);
-        }
+        Remove(articleInfo);
+        return _articles.Add(articleInfo);
+    }
 
-        public bool Contains(string title)
-        {
-            return articles.Where(info => info.Title == title).Any();
-        }
+    public bool Contains(string title)
+    {
+        return _articles.Any(info => info.Title == title);
+    }
 
-        public bool Contains(ArticleInfo articleInfo)
-        {
-            if (articles.Contains(articleInfo))
-            {
-                return true;
-            }
-            return articles.Where(info => info.Title == articleInfo.Title).Any();
-        }
+    public bool Contains(ArticleInfo articleInfo)
+    {
+        return _articles.Contains(articleInfo) || _articles.Any(info => info.Title == articleInfo.Title);
     }
 }

@@ -1,14 +1,8 @@
-﻿namespace myonAPI.Models
+﻿namespace myonAPI.Models;
+
+internal class ArticleInfo
 {
-    public class ArticleInfo
-    {
-        public ArticleInfo(string title)
-        {
-            Title = title;
-        }
+    public string Title { get; set; } = "";
 
-        public string Title { get; set; }
-
-        public string? Content { get; set; }
-    }
+    public string? Content { get; set; }
 }

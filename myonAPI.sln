@@ -5,7 +5,7 @@ VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "myonAPI", "src\myonAPI.csproj", "{C7BAE888-3FA9-443D-8782-A1717AD8929E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "myonAPI.Test", "test\myonAPI.Test.csproj", "{E4BB6200-2AC3-48A9-A582-9E418288B298}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "myonAPI.Tests", "test\myonAPI.Tests.csproj", "{E4BB6200-2AC3-48A9-A582-9E418288B298}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -2,7 +2,7 @@
 
 namespace myonAPI.Services;
 
-public interface IArticleService
+internal interface IArticleService
 {
     public IEnumerable<ArticleInfo> Get();
 

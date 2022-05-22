@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-namespace APITest;
+namespace myonAPI.Tests;
 
 public class ArticleServiceTests
 {
