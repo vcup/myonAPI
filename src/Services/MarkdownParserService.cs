@@ -12,14 +12,13 @@ internal class MarkdownParserService
         .UseGridTables()
         .UseEmojiAndSmiley();
 
-    public Dictionary<string, string> MarkdownHeadings { get; set; }
+    public Dictionary<string, string> MarkdownHeadings { get; set; } = null!;
 
     private readonly MarkdownPipeline _pipeline;
     
     public MarkdownParserService(UniqueNumberService service)
     {
         _service = service;
-        MarkdownHeadings = new();
 
         var autoId = new AutoIdExtension(AutoIdExtensionOption.EnableAll);
         _pipeline = PipelineBuilder.Use(autoId).Build();
@@ -35,7 +34,7 @@ internal class MarkdownParserService
 
     public string GetHtml(string key, string markdown)
     {
-        MarkdownHeadings.Clear();
+        MarkdownHeadings = new();
 
         // 如果使用私有字段与构造函数共享该对象
         // 第一个对 autoId.WhenSetId 事件附加处理的实例会一直被调用
