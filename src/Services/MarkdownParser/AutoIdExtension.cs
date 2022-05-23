@@ -108,5 +108,6 @@ internal class AutoIdExtension : IMarkdownExtension
     }
 
     public delegate void IdSettedIdHandler(string id, string heading);
+
     public event IdSettedIdHandler? WhenSetId;
 }

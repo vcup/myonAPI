@@ -27,12 +27,12 @@ public class ArticlesController : ControllerBase
     // GET api/<ArticlesController>/Title
     [HttpGet("{title}")]
     public ActionResult<ArticleInfo> Get(string title)
-    {   
+    {
         if (string.IsNullOrEmpty(title))
         {
             return BadRequest(title);
         }
-            
+
         var result = _service.Get(title);
         if (result is null)
         {
@@ -86,6 +86,7 @@ public class ArticlesController : ControllerBase
         {
             return NotFound();
         }
+
         return Ok();
     }
 }

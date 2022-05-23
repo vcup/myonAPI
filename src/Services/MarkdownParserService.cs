@@ -15,7 +15,7 @@ internal class MarkdownParserService
     public Dictionary<string, string> MarkdownHeadings { get; set; } = null!;
 
     private readonly MarkdownPipeline _pipeline;
-    
+
     public MarkdownParserService(UniqueNumberService service)
     {
         _service = service;

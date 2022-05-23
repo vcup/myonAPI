@@ -13,7 +13,8 @@ internal class ArticleService : IArticleService
     {
         _service = service;
         var titles = _articles.Select(info => info.Title).ToList();
-        var filenames = Directory.EnumerateFiles(articlesPath, "*.md").Select(Path.GetFileNameWithoutExtension).ToList();
+        var filenames = Directory.EnumerateFiles(articlesPath, "*.md").Select(Path.GetFileNameWithoutExtension)
+            .ToList();
 
         // Create all markdown article on filesystem to .net object
         var result = filenames.Except(titles)
@@ -30,7 +31,7 @@ internal class ArticleService : IArticleService
         {
             return false;
         }
-            
+
         var articleFilePath = Path.Join(articlesPath, title + ".md");
         if (!File.Exists(articleFilePath))
         {
@@ -61,6 +62,7 @@ internal class ArticleService : IArticleService
 
         return _articles.Add(articleInfo);
     }
+
     public IEnumerable<ArticleInfo> Get()
     {
         return _articles;
@@ -89,11 +91,11 @@ internal class ArticleService : IArticleService
 
     public bool Update(ArticleInfo articleInfo)
     {
-        if (!_articles.Any(info => info == articleInfo)) 
+        if (!_articles.Any(info => info == articleInfo))
         {
             return false;
         }
-            
+
         Remove(articleInfo);
         return _articles.Add(articleInfo);
     }

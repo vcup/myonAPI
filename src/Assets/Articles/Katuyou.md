@@ -47,15 +47,32 @@
 
 |尾音|五段动词|未然形|ます形|音便形|终止形|连体形|假定形|命令形|意志形|
 |:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-|く|<ruby>歩<rt>ある</rt></ruby>く|あるかない|<ruby>歩<rt>ある</rt></ruby>きます|<ruby>歩<rt>ある</rt></ruby>いて|<ruby>歩<rt>ある</rt></ruby>く|<ruby>歩<rt>ある</rt></ruby>く|<ruby>歩<rt>ある</rt></ruby>けば|<ruby>歩<rt>ある</rt></ruby>け|<ruby>歩<rt>ある</rt></ruby>こう
-|ぐ|<ruby>脱<rt>ぬ</rt></ruby>ぐ|<ruby>脱<rt>ぬ</rt></ruby>がない|<ruby>脱<rt>ぬ</rt></ruby>ぎます|<ruby>脱<rt>ぬ</rt></ruby>いで|<ruby>脱<rt>ぬ</rt></ruby>ぐ|<ruby>脱<rt>ぬ</rt></ruby>ぐ|<ruby>脱<rt>ぬ</rt></ruby>げば|<ruby>脱<rt>ぬ</rt></ruby>げ|<ruby>脱<rt>ぬ</rt></ruby>ごう
-|す|<ruby>話<rt>はな</rt></ruby>す|<ruby>話<rt>はな</rt></ruby>さない|<ruby>話<rt>はな</rt></ruby>します|<ruby>話<rt>はな</rt></ruby>して|<ruby>話<rt>はな</rt></ruby>す|<ruby>話<rt>はな</rt></ruby>す|<ruby>話<rt>はな</rt></ruby>せば|<ruby>話<rt>はな</rt></ruby>せ|<ruby>話<rt>はな</rt></ruby>そう
-|つ|<ruby>待<rt>ま</rt></ruby>つ|<ruby>待<rt>ま</rt></ruby>たない|<ruby>待<rt>ま</rt></ruby>ちます|<ruby>待<rt>ま</rt></ruby>って|<ruby>待<rt>ま</rt></ruby>つ|<ruby>待<rt>ま</rt></ruby>つ|<ruby>待<rt>ま</rt></ruby>てば|<ruby>待<rt>ま</rt></ruby>て|<ruby>待<rt>ま</rt></ruby>とう|
-|ぬ|<ruby>死<rt>し</rt></ruby>ぬ|<ruby>死<rt>し</rt></ruby>なない|<ruby>死<rt>し</rt></ruby>にます|<ruby>死<rt>し</rt></ruby>んて|<ruby>死<rt>し</rt></ruby>ぬ|<ruby>死<rt>し</rt></ruby>ぬ|<ruby>死<rt>し</rt></ruby>ねば|<ruby>死<rt>し</rt></ruby>ね|<ruby>死<rt>し</rt></ruby>のう|
-|ぶ|<ruby>飛<rt>と</rt></ruby>ぶ|<ruby>飛<rt>と</rt></ruby>ばない|<ruby>飛<rt>と</rt></ruby>びます|<ruby>飛<rt>と</rt></ruby>んで|<ruby>飛<rt>と</rt></ruby>ぶ|<ruby>飛<rt>と</rt></ruby>ぶ|<ruby>飛<rt>と</rt></ruby>べば|<ruby>飛<rt>と</rt></ruby>べ|<ruby>飛<rt>と</rt></ruby>ぼう|
-|む|<ruby>沈<rt>しず</rt></ruby>む|<ruby>沈<rt>しず</rt></ruby>まない|<ruby>沈<rt>しず</rt></ruby>みます|<ruby>沈<rt>しず</rt></ruby>んて|<ruby>沈<rt>しず</rt></ruby>む|<ruby>沈<rt>しず</rt></ruby>む|<ruby>沈<rt>しず</rt></ruby>めば|<ruby>沈<rt>しず</rt></ruby>め|<ruby>沈<rt>しず</rt></ruby>もう|
-|る|<ruby>走<rt>はし</rt></ruby>る|<ruby>走<rt>はし</rt></ruby>らない|<ruby>走<rt>はし</rt></ruby>ります|<ruby>走<rt>はし</rt></ruby>って|<ruby>走<rt>はし</rt></ruby>る|<ruby>走<rt>はし</rt></ruby>る|<ruby>走<rt>はし</rt></ruby>れば|<ruby>走<rt>はし</rt></ruby>れ|<ruby>走<rt>はし</rt></ruby>ろう|
-|う|<ruby>歌<rt>うた</rt>う</ruby>|<ruby>歌<rt>うた</rt></ruby>わない|<ruby>歌<rt>うた</rt></ruby>います|<ruby>歌<rt>うた</rt></ruby>って|<ruby>歌<rt>うた</rt></ruby>う|<ruby>歌<rt>うた</rt></ruby>う|<ruby>歌<rt>うた</rt></ruby>えば|<ruby>歌<rt>うた</rt></ruby>え|<ruby>歌<rt>うた</rt></ruby>おう|
+|く|<ruby>歩<rt>ある</rt></ruby>く|あるかない|<ruby>歩<rt>ある</rt></ruby>きます|<ruby>歩<rt>ある</rt></ruby>いて|<ruby>歩<rt>ある</rt></ruby>
+く|<ruby>歩<rt>ある</rt></ruby>く|<ruby>歩<rt>ある</rt></ruby>けば|<ruby>歩<rt>ある</rt></ruby>け|<ruby>歩<rt>ある</rt></ruby>こう
+|ぐ|<ruby>脱<rt>ぬ</rt></ruby>ぐ|<ruby>脱<rt>ぬ</rt></ruby>がない|<ruby>脱<rt>ぬ</rt></ruby>ぎます|<ruby>脱<rt>ぬ</rt></ruby>いで|<ruby>
+脱<rt>ぬ</rt></ruby>ぐ|<ruby>脱<rt>ぬ</rt></ruby>ぐ|<ruby>脱<rt>ぬ</rt></ruby>げば|<ruby>脱<rt>ぬ</rt></ruby>げ|<ruby>脱<rt>
+ぬ</rt></ruby>ごう
+|す|<ruby>話<rt>はな</rt></ruby>す|<ruby>話<rt>はな</rt></ruby>さない|<ruby>話<rt>はな</rt></ruby>します|<ruby>話<rt>はな</rt></ruby>
+して|<ruby>話<rt>はな</rt></ruby>す|<ruby>話<rt>はな</rt></ruby>す|<ruby>話<rt>はな</rt></ruby>せば|<ruby>話<rt>はな</rt></ruby>せ|<ruby>
+話<rt>はな</rt></ruby>そう
+|つ|<ruby>待<rt>ま</rt></ruby>つ|<ruby>待<rt>ま</rt></ruby>たない|<ruby>待<rt>ま</rt></ruby>ちます|<ruby>待<rt>ま</rt></ruby>って|<ruby>
+待<rt>ま</rt></ruby>つ|<ruby>待<rt>ま</rt></ruby>つ|<ruby>待<rt>ま</rt></ruby>てば|<ruby>待<rt>ま</rt></ruby>て|<ruby>待<rt>
+ま</rt></ruby>とう|
+|ぬ|<ruby>死<rt>し</rt></ruby>ぬ|<ruby>死<rt>し</rt></ruby>なない|<ruby>死<rt>し</rt></ruby>にます|<ruby>死<rt>し</rt></ruby>んて|<ruby>
+死<rt>し</rt></ruby>ぬ|<ruby>死<rt>し</rt></ruby>ぬ|<ruby>死<rt>し</rt></ruby>ねば|<ruby>死<rt>し</rt></ruby>ね|<ruby>死<rt>
+し</rt></ruby>のう|
+|ぶ|<ruby>飛<rt>と</rt></ruby>ぶ|<ruby>飛<rt>と</rt></ruby>ばない|<ruby>飛<rt>と</rt></ruby>びます|<ruby>飛<rt>と</rt></ruby>んで|<ruby>
+飛<rt>と</rt></ruby>ぶ|<ruby>飛<rt>と</rt></ruby>ぶ|<ruby>飛<rt>と</rt></ruby>べば|<ruby>飛<rt>と</rt></ruby>べ|<ruby>飛<rt>
+と</rt></ruby>ぼう|
+|む|<ruby>沈<rt>しず</rt></ruby>む|<ruby>沈<rt>しず</rt></ruby>まない|<ruby>沈<rt>しず</rt></ruby>みます|<ruby>沈<rt>しず</rt></ruby>
+んて|<ruby>沈<rt>しず</rt></ruby>む|<ruby>沈<rt>しず</rt></ruby>む|<ruby>沈<rt>しず</rt></ruby>めば|<ruby>沈<rt>しず</rt></ruby>め|<ruby>
+沈<rt>しず</rt></ruby>もう|
+|る|<ruby>走<rt>はし</rt></ruby>る|<ruby>走<rt>はし</rt></ruby>らない|<ruby>走<rt>はし</rt></ruby>ります|<ruby>走<rt>はし</rt></ruby>
+って|<ruby>走<rt>はし</rt></ruby>る|<ruby>走<rt>はし</rt></ruby>る|<ruby>走<rt>はし</rt></ruby>れば|<ruby>走<rt>はし</rt></ruby>れ|<ruby>
+走<rt>はし</rt></ruby>ろう|
+|う|<ruby>歌<rt>うた</rt>う</ruby>|<ruby>歌<rt>うた</rt></ruby>わない|<ruby>歌<rt>うた</rt></ruby>います|<ruby>歌<rt>うた</rt></ruby>
+って|<ruby>歌<rt>うた</rt></ruby>う|<ruby>歌<rt>うた</rt></ruby>う|<ruby>歌<rt>うた</rt></ruby>えば|<ruby>歌<rt>うた</rt></ruby>え|<ruby>
+歌<rt>うた</rt></ruby>おう|
 
 ### 一段活用
 
@@ -73,11 +90,16 @@
 
 |一段动词|未然形|ます形|音便形|终止形|连体形|假定形|命令形|意志形|
 |:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-|<ruby>尽<rt>つ</rt></ruby>きる|<ruby>尽<rt>つ</rt></ruby>きない|<ruby>尽<rt>つ</rt></ruby>きます|<ruby>尽<rt>つ</rt></ruby>きて|<ruby>尽<rt>つ</rt></ruby>きる|<ruby>尽<rt>つ</rt></ruby>きる|<ruby>尽<rt>つ</rt></ruby>きれば|<ruby>尽<rt>つ</rt></ruby>きれ|<ruby>尽<rt>つ</rt></ruby>きよう|
-|<ruby>起<rt>お</rt></ruby>きる|<ruby>起<rt>お</rt></ruby>きない|<ruby>起<rt>お</rt></ruby>きます|<ruby>起<rt>お</rt></ruby>きて|<ruby>起<rt>お</rt></ruby>きる|<ruby>起<rt>お</rt></ruby>きる|<ruby>起<rt>お</rt></ruby>きれば|<ruby>起<rt>お</rt></ruby>きれ|<ruby>起<rt>お</rt></ruby>きよう|
+|<ruby>尽<rt>つ</rt></ruby>きる|<ruby>尽<rt>つ</rt></ruby>きない|<ruby>尽<rt>つ</rt></ruby>きます|<ruby>尽<rt>つ</rt></ruby>きて|<ruby>
+尽<rt>つ</rt></ruby>きる|<ruby>尽<rt>つ</rt></ruby>きる|<ruby>尽<rt>つ</rt></ruby>きれば|<ruby>尽<rt>つ</rt></ruby>きれ|<ruby>尽<rt>
+つ</rt></ruby>きよう|
+|<ruby>起<rt>お</rt></ruby>きる|<ruby>起<rt>お</rt></ruby>きない|<ruby>起<rt>お</rt></ruby>きます|<ruby>起<rt>お</rt></ruby>きて|<ruby>
+起<rt>お</rt></ruby>きる|<ruby>起<rt>お</rt></ruby>きる|<ruby>起<rt>お</rt></ruby>きれば|<ruby>起<rt>お</rt></ruby>きれ|<ruby>起<rt>
+お</rt></ruby>きよう|
 |呉れる|||
 
 ### さ变活用
+
 [一段活用]
 
 **未然形**：する→しない

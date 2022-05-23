@@ -13,6 +13,7 @@ internal class UniqueNumberService
             value = _n;
             return TryAddNumber(key);
         }
+
         return true;
     }
 
