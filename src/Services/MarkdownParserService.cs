@@ -53,5 +53,6 @@ internal class MarkdownParserService
         return result;
     }
 
-    private void AddHeading(string id, string heading) => MarkdownHeadings.TryAdd(id, heading);
+    private void AddHeading(string id, string heading) =>
+        MarkdownHeadings.TryAdd(id, Markdown.ToHtml(heading, _pipeline));
 }
