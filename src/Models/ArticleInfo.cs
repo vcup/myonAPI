@@ -5,7 +5,7 @@ public record ArticleInfo
     /// <summary>
     /// title of article
     /// </summary>
-    public string Title { get; set; } = "";
+    public string Title { get; set; } = string.Empty;
 
     /// <summary>
     /// content is html format

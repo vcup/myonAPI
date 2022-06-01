@@ -81,6 +81,7 @@ internal class AutoIdExtension : IMarkdownExtension
                 stringBuilder.Insert(0, lastSectionNo.ToString() + '-');
                 level--;
             }
+            stringBuilder.Remove(stringBuilder.Length - 1, 1);
 
             #endregion
 
@@ -92,10 +93,11 @@ internal class AutoIdExtension : IMarkdownExtension
             if ((_parent._option & AutoIdExtensionOption.UseOriginalId) != 0
                 && attributes.Id is not null)
             {
+                stringBuilder.Append('-');
                 var tmp = attributes.Id.Split('-');
                 if (tmp.Length > 1)
                 {
-                    stringBuilder.AppendJoin('-', attributes.Id.Split('-').SkipLast(1));
+                    stringBuilder.AppendJoin('-', tmp.SkipLast(1));
                 }
                 else
                 {

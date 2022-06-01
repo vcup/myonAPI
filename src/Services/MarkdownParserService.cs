@@ -12,7 +12,7 @@ internal class MarkdownParserService
         .UseGridTables()
         .UseEmojiAndSmiley();
 
-    public Dictionary<string, string> MarkdownHeadings { get; set; } = null!;
+    public Dictionary<string, string> MarkdownHeadings { get; private set; } = null!;
 
     private readonly MarkdownPipeline _pipeline;
 
@@ -20,7 +20,7 @@ internal class MarkdownParserService
     {
         _service = service;
 
-        var autoId = new AutoIdExtension(AutoIdExtensionOption.EnableAll);
+        var autoId = new AutoIdExtension(AutoIdExtensionOption.UseAutoPrefix);
         _pipeline = PipelineBuilder.Use(autoId).Build();
     }
 
