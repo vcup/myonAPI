@@ -1,112 +1,92 @@
-﻿using System.Diagnostics;
-using myonAPI.Models;
+﻿using myonAPI.Models;
+using YamlDotNet.Serialization;
+using YamlDotNet.Serialization.NamingConventions;
 
 namespace myonAPI.Services;
 
 internal class ArticleService : IArticleService
 {
-    private readonly MarkdownParserService _service;
-    private readonly string articlesPath = "./Assets/Articles";
-    private readonly HashSet<ArticleInfo> _articles = new();
+    private const string ArticleIndexFile = "./Assets/Articles/Index.yaml";
+    private readonly HashSet<ArticleDescriptor> _articles = new();
 
-    public ArticleService(MarkdownParserService service)
+    public ArticleService(IServiceProvider provider)
     {
-        _service = service;
-        var titles = _articles.Select(info => info.Title).ToList();
-        var filenames = Directory.EnumerateFiles(articlesPath, "*.md").Select(Path.GetFileNameWithoutExtension)
-            .ToList();
+        using var indexReadStream = File.OpenText(ArticleIndexFile);
+        var deserializer = new DeserializerBuilder()
+            .WithNamingConvention(UnderscoredNamingConvention.Instance)
+            .Build();
 
-        // Create all markdown article on filesystem to .net object
-        var result = filenames.Except(titles)
-            .Select(Create!)
-            .All(result => result);
-        Debug.Assert(result);
+        var descriptors = deserializer.Deserialize<IEnumerable<ArticleDescriptor>>(indexReadStream);
+        var articleStartPath = Path.GetDirectoryName(ArticleIndexFile);
+        foreach (var descriptor in descriptors)
+        {
+            descriptor.ContentFilePath = Path.Join(articleStartPath, descriptor.ContentFilePath);
+            descriptor.PicturePath = Path.Join(articleStartPath, descriptor.PicturePath);
+            descriptor.Build(provider.GetRequiredService<MarkdownParserService>());
+            _articles.Add(descriptor);
+        }
     }
 
     public int Count => _articles.Count;
 
-    public bool Create(string title)
+    public bool Create(ArticleDescriptor articleContent)
     {
-        if (string.IsNullOrEmpty(title))
+        if (_articles.Any(info => info.Title == articleContent.Title))
         {
             return false;
         }
 
-        var articleFilePath = Path.Join(articlesPath, title + ".md");
-        if (!File.Exists(articleFilePath))
+        if (string.IsNullOrEmpty(articleContent.Content))
         {
-            return false;
+            articleContent.Content = File.ReadAllText(Path.Join(ArticleIndexFile, articleContent.Title + ".md"));
         }
 
-        var article = new ArticleInfo
-        {
-            Title = title,
-            Content = _service.GetHtml(articleFilePath),
-            HtmlHeadingIdRelation = _service.MarkdownHeadings
-        };
-
-        return Create(article);
+        return _articles.Add(articleContent);
     }
 
-    public bool Create(ArticleInfo articleInfo)
-    {
-        if (_articles.Any(info => info.Title == articleInfo.Title))
-        {
-            return false;
-        }
-
-        if (string.IsNullOrEmpty(articleInfo.Content))
-        {
-            articleInfo.Content = File.ReadAllText(Path.Join(articlesPath, articleInfo.Title + ".md"));
-        }
-
-        return _articles.Add(articleInfo);
-    }
-
-    public IEnumerable<ArticleInfo> Get()
+    public IEnumerable<ArticleDescriptor> Get()
     {
         return _articles;
     }
 
-    public ArticleInfo? Get(string title)
+    public ArticleDescriptor? Get(int id)
     {
-        return _articles.FirstOrDefault(info => info.Title == title);
+        return _articles.FirstOrDefault(info => info.Id == id);
     }
 
-    public ArticleInfo? Get(ArticleInfo articleInfo)
+    public ArticleDescriptor? Get(ArticleDescriptor articleContent)
     {
-        return Get(articleInfo.Title);
+        return Get(articleContent.Id);
     }
 
-
-    public bool Remove(string title)
+    public bool Remove(int id)
     {
-        return _articles.RemoveWhere(info => info.Title == title) != 0;
+        return _articles.RemoveWhere(info => info.Id == id) != 0;
     }
 
-    public bool Remove(ArticleInfo articleInfo)
+    public bool Remove(ArticleDescriptor articleContent)
     {
-        return Remove(articleInfo.Title);
+        return Remove(articleContent.Id);
     }
 
-    public bool Update(ArticleInfo articleInfo)
+    public bool Update(ArticleDescriptor articleContent)
     {
-        if (!_articles.Any(info => info == articleInfo))
+        if (!Contains(articleContent.Id))
         {
             return false;
         }
 
-        Remove(articleInfo);
-        return _articles.Add(articleInfo);
+        Remove(articleContent);
+        return _articles.Add(articleContent);
     }
 
-    public bool Contains(string title)
+    public bool Contains(int id)
     {
-        return _articles.Any(info => info.Title == title);
+        return _articles.Any(info => info.Id == id);
     }
 
-    public bool Contains(ArticleInfo articleInfo)
+    public bool Contains(ArticleDescriptor articleContent)
     {
-        return _articles.Contains(articleInfo) || _articles.Any(info => info.Title == articleInfo.Title);
+        return _articles.Contains(articleContent) || _articles.Any(info => info.Title == articleContent.Title);
     }
 }

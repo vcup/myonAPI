@@ -4,22 +4,22 @@ namespace myonAPI.Services;
 
 public interface IArticleService
 {
-    public IEnumerable<ArticleInfo> Get();
+    public IEnumerable<ArticleDescriptor> Get();
 
-    public ArticleInfo? Get(string title);
+    public ArticleDescriptor? Get(int id);
 
-    public ArticleInfo? Get(ArticleInfo articleInfo);
+    public ArticleDescriptor? Get(ArticleDescriptor articleContent);
 
-    public bool Create(ArticleInfo articleInfo);
+    public bool Create(ArticleDescriptor articleContent);
 
-    public bool Remove(string title);
+    public bool Remove(int id);
 
-    public bool Remove(ArticleInfo articleInfo);
+    public bool Remove(ArticleDescriptor articleContent);
 
-    public bool Update(ArticleInfo articleInfo);
+    public bool Update(ArticleDescriptor articleContent);
 
     public int Count { get; }
 
-    public bool Contains(string title);
-    public bool Contains(ArticleInfo articleInfo);
+    public bool Contains(int id);
+    public bool Contains(ArticleDescriptor articleContent);
 }

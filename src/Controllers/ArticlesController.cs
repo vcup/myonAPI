@@ -19,21 +19,21 @@ public class ArticlesController : ControllerBase
 
     // GET: api/<ArticlesController>
     [HttpGet]
-    public ActionResult<IEnumerable<ArticleInfo>> Get()
+    public ActionResult<IEnumerable<ArticleDescriptor>> Get()
     {
         return Ok(_service.Get());
     }
 
     // GET api/<ArticlesController>/Title
-    [HttpGet("{title}")]
-    public ActionResult<ArticleInfo> Get(string title)
+    [HttpGet("{id:int}")]
+    public ActionResult<ArticleDescriptor> Get(int id)
     {
-        if (string.IsNullOrEmpty(title))
+        if (id < 0)
         {
-            return BadRequest(title);
+            return BadRequest(id);
         }
 
-        var result = _service.Get(title);
+        var result = _service.Get(id);
         if (result is null)
         {
             return NotFound();
@@ -44,15 +44,11 @@ public class ArticlesController : ControllerBase
 
     // POST api/<ArticlesController>
     [HttpPost]
-    public ActionResult Post(ArticleInfo article)
+    public ActionResult Post(ArticleDescriptor article)
     {
-        if (string.IsNullOrEmpty(article.Title))
+        if (article.Id < 0 || _service.Contains(article))
         {
             return BadRequest(article);
-        }
-        else if (!_service.Contains(article))
-        {
-            return NotFound();
         }
 
         return _service.Create(article) ? Ok() : BadRequest(article);
@@ -60,7 +56,7 @@ public class ArticlesController : ControllerBase
 
     // PUT api/<ArticlesController>
     [HttpPut]
-    public ActionResult Put(ArticleInfo article)
+    public ActionResult Put(ArticleDescriptor article)
     {
         if (string.IsNullOrEmpty(article.Title))
         {
@@ -75,14 +71,14 @@ public class ArticlesController : ControllerBase
     }
 
     // DELETE api/<ArticlesController>/Title
-    [HttpDelete("{title}")]
-    public ActionResult Delete(string title)
+    [HttpDelete("{id:int}")]
+    public ActionResult Delete(int id)
     {
-        if (string.IsNullOrEmpty(title))
+        if (id < 0)
         {
             return BadRequest();
         }
-        else if (!_service.Contains(title))
+        else if (!_service.Contains(id))
         {
             return NotFound();
         }
