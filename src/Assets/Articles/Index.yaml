@@ -1,17 +1,17 @@
 - id: 0
   title: Test
-  sub_title: ''
+  sub_title: the article use for test
   content_file_path: ./Test.md
-  picture_path: ''
+  picture_uri: https://prd.storage.lit.link/images/creator/eefe491f-ac68-40ab-9559-4754a4ee7ff9/dbb240dd-2cd0-4796-bb57-5921f1b53fd2.png
 
 - id: 1
   title: Katuyou
   sub_title: ''
   content_file_path: ./Katuyou.md
-  picture_path: ''
+  picture_uri: ''
 
 - id: 2
-  title: 'Async&Await - Asynchronous Programming in C#'
+  title: Async&Await - Asynchronous Programming in C#
   sub_title: ''
-  content_file_path: './Async&Await - Asynchronous programming in C#.md'
-  picture_path: ''
+  content_file_path: ./Async&Await - Asynchronous programming in C#.md
+  picture_uri: ''

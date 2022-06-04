@@ -13,9 +13,8 @@ public record ArticleDescriptor
     
     [JsonIgnore]
     public string ContentFilePath { get; set; } = string.Empty;
-    
-    [JsonIgnore]
-    public string PicturePath { get; set; } = string.Empty;
+
+    public Uri? PictureUri { get; set; }
 
     /// <summary>
     /// content is html format

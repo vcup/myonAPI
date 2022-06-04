@@ -21,7 +21,6 @@ internal class ArticleService : IArticleService
         foreach (var descriptor in descriptors)
         {
             descriptor.ContentFilePath = Path.Join(articleStartPath, descriptor.ContentFilePath);
-            descriptor.PicturePath = Path.Join(articleStartPath, descriptor.PicturePath);
             descriptor.Build(provider.GetRequiredService<MarkdownParserService>());
         }
 
