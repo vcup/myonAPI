@@ -24,7 +24,7 @@ public class ArticlesController : ControllerBase
         return Ok(_service.Get());
     }
 
-    // GET api/<ArticlesController>/Title
+    // GET api/<ArticlesController>/id
     [HttpGet("{id:int}")]
     public ActionResult<ArticleDescriptor> Get(int id)
     {
@@ -58,7 +58,7 @@ public class ArticlesController : ControllerBase
     [HttpPut]
     public ActionResult Put(ArticleDescriptor article)
     {
-        if (string.IsNullOrEmpty(article.Title))
+        if (article.Id < 0)
         {
             return BadRequest(article);
         }
@@ -70,7 +70,7 @@ public class ArticlesController : ControllerBase
         return _service.Update(article) ? Ok() : BadRequest(article);
     }
 
-    // DELETE api/<ArticlesController>/Title
+    // DELETE api/<ArticlesController>/id
     [HttpDelete("{id:int}")]
     public ActionResult Delete(int id)
     {
@@ -83,6 +83,7 @@ public class ArticlesController : ControllerBase
             return NotFound();
         }
 
+        _service.Remove(id);
         return Ok();
     }
 }

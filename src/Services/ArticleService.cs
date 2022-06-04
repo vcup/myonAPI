@@ -7,7 +7,7 @@ namespace myonAPI.Services;
 internal class ArticleService : IArticleService
 {
     private const string ArticleIndexFile = "./Assets/Articles/Index.yaml";
-    private readonly HashSet<ArticleDescriptor> _articles = new();
+    public readonly List<ArticleDescriptor> Articles;
 
     public ArticleService(IServiceProvider provider)
     {
@@ -16,22 +16,23 @@ internal class ArticleService : IArticleService
             .WithNamingConvention(UnderscoredNamingConvention.Instance)
             .Build();
 
-        var descriptors = deserializer.Deserialize<IEnumerable<ArticleDescriptor>>(indexReadStream);
+        var descriptors = deserializer.Deserialize<List<ArticleDescriptor>>(indexReadStream);
         var articleStartPath = Path.GetDirectoryName(ArticleIndexFile);
         foreach (var descriptor in descriptors)
         {
             descriptor.ContentFilePath = Path.Join(articleStartPath, descriptor.ContentFilePath);
             descriptor.PicturePath = Path.Join(articleStartPath, descriptor.PicturePath);
             descriptor.Build(provider.GetRequiredService<MarkdownParserService>());
-            _articles.Add(descriptor);
         }
+
+        Articles = descriptors;
     }
 
-    public int Count => _articles.Count;
+    public int Count => Articles.Count;
 
     public bool Create(ArticleDescriptor articleContent)
     {
-        if (_articles.Any(info => info.Title == articleContent.Title))
+        if (Articles.Any(info => info.Title == articleContent.Title))
         {
             return false;
         }
@@ -41,17 +42,18 @@ internal class ArticleService : IArticleService
             articleContent.Content = File.ReadAllText(Path.Join(ArticleIndexFile, articleContent.Title + ".md"));
         }
 
-        return _articles.Add(articleContent);
+        Articles.Add(articleContent);
+        return true;
     }
 
     public IEnumerable<ArticleDescriptor> Get()
     {
-        return _articles;
+        return Articles;
     }
 
     public ArticleDescriptor? Get(int id)
     {
-        return _articles.FirstOrDefault(info => info.Id == id);
+        return Articles.FirstOrDefault(info => info.Id == id);
     }
 
     public ArticleDescriptor? Get(ArticleDescriptor articleContent)
@@ -61,32 +63,32 @@ internal class ArticleService : IArticleService
 
     public bool Remove(int id)
     {
-        return _articles.RemoveWhere(info => info.Id == id) != 0;
+        return Articles.RemoveAll(descriptor => descriptor.Id == id) != 0;
     }
 
     public bool Remove(ArticleDescriptor articleContent)
     {
-        return Remove(articleContent.Id);
+        return Articles.Remove(articleContent);
     }
 
     public bool Update(ArticleDescriptor articleContent)
     {
-        if (!Contains(articleContent.Id))
+        if (!Remove(articleContent))
         {
             return false;
         }
 
-        Remove(articleContent);
-        return _articles.Add(articleContent);
+        Articles.Add(articleContent);
+        return true;
     }
 
     public bool Contains(int id)
     {
-        return _articles.Any(info => info.Id == id);
+        return Articles.Any(info => info.Id == id);
     }
 
     public bool Contains(ArticleDescriptor articleContent)
     {
-        return _articles.Contains(articleContent) || _articles.Any(info => info.Title == articleContent.Title);
+        return Articles.Contains(articleContent) || Articles.Any(info => info.Title == articleContent.Title);
     }
 }
