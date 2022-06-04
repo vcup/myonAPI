@@ -17,7 +17,10 @@ internal class MarkdownParserService
     public MarkdownParserService()
     {
         var autoId = new AutoIdExtension(AutoIdExtensionOption.UseAutoPrefix);
-        _pipeline = PipelineBuilder.Use(autoId).Build();
+        _pipeline = PipelineBuilder
+            .Use(autoId)
+            .Use<AlwaysAddOneForHeadingLevelExtension>()
+            .Build();
         MarkdownHeadings = new Dictionary<string, string>();
     }
 

@@ -75,7 +75,7 @@ internal class AutoIdExtension : IMarkdownExtension
             sectionNOs[headingBlock.Level]++;
 
             var stringBuilder = new StringBuilder();
-            while (level > 0)
+            while (level > 1)
             {
                 sectionNOs.TryGetValue(level, out var lastSectionNo);
                 stringBuilder.Insert(0, lastSectionNo.ToString() + '-');
