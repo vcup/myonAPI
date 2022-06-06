@@ -20,6 +20,7 @@ internal class MarkdownParserService
         _pipeline = PipelineBuilder
             .Use(autoId)
             .Use<AlwaysAddOneForHeadingLevelExtension>()
+            .Use<LinkHeading>()
             .Build();
         MarkdownHeadings = new Dictionary<string, string>();
     }
