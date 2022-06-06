@@ -15,3 +15,9 @@
   sub_title: ''
   content_file_path: ./Async&Await - Asynchronous programming in C#.md
   picture_uri: ''
+
+- id: 3
+  title: 《東雪蓮为什么是神》
+  sub_title: “車雷達！我真的、好喜欢你啊！为了你、我要给你写小作文！”
+  content_file_path: ./KamiAzuma.md
+  picture_uri: https://vcup.moe/api/assets/KamiAzuma-Cover.png
