@@ -9,7 +9,7 @@
 最最开始接触到一点点相关捏他是在[粘连科技](https://space.bilibili.com/248582596/)的某一期视频中出现的[你的小罕见突然出现.jpg](https://vcup.moe/api/assets/KamiAzuma-ee_sticker.jpg)  
 > 开始我还不了解“罕见”一词具体是什么意思，认为是稀有少见一类，亦或者是 '你的小可爱突然出现' 的意思，觉得很可爱就收藏作为qq表情包常常使用。后来发现罕见一词是谐音 汉奸 就删除了。
 
-在哔哩哔哩上看到了[鸭梨傻](https://space.bilibili.com/344932644)的[罕 见 的 日 语](https://www.bilibili.com/video/BV18a411E7Hw)了解到了这样一个 vtuber，在哔哩哔哩、推特、油管上也找到了她的账号。总之是开始关注了  
+在哔哩哔哩上看到了[丶酸梨](https://space.bilibili.com/344932644)的[罕 见 的 日 语](https://www.bilibili.com/video/BV18a411E7Hw)了解到了这样一个 vtuber，在哔哩哔哩、推特、油管上也找到了她的账号。总之是开始关注了  
 在哔哩哔哩上看了许多关于东雪莲的二次创作以及切片，了解到了 罕见 一词是与东雪莲强相关的，但没了解到这词是侮辱性的。  
 
 ## 直播切片等
