@@ -1,4 +1,4 @@
-﻿using myonAPI.Models;
+using myonAPI.Models;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 

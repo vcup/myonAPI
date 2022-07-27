@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 using YamlDotNet.Serialization;
 
 namespace myonAPI.Models;

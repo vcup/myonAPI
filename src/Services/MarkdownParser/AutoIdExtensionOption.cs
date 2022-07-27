@@ -1,4 +1,4 @@
-﻿namespace myonAPI.Services.MarkdownParser;
+namespace myonAPI.Services.MarkdownParser;
 
 [Flags]
 internal enum AutoIdExtensionOption

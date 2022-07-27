@@ -1,4 +1,4 @@
-﻿using Markdig;
+using Markdig;
 using myonAPI.Services.MarkdownParser;
 
 namespace myonAPI.Services;
