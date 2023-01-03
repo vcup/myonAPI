@@ -15,21 +15,19 @@ C# 异步编程基于Task任务模型，包括异步方法 `async` `await` 关�
 
 ### 异步方法中处理异常
 根据不同的返回值，C#编译器会生成不同的IL代码，且方法体内使用的返回值的类型也不同
-返回值使用 `void` 的时候，则生成的异步方法在执行是如果遇到异常，则直接通过同步上下文抛出异常，这会立刻中断调用该异步方法的线程/任务
+返回值使用 `void` 的时候，则生成的异步方法在执行是如果遇到异常，则直接通过同步上下文抛出异常，这会立刻中断调用该异步方法的线程/任务  
+返回值使用 `Task` 时在处理异常时有些不一样，在任务内部遇到异常之后，只有在对该任务使用 `await` 运算符时才会捕获异常
 
 ### 在异步方法中返回
-返回值使用 `Task` 时在处理异常时有些不一样，在任务内部遇到异常之后，只有在对该任务使用 `await` 运算符时才会捕获异常
-前两种都是不具备返回值的异步方法，在方法体中使用空的 `return;` 语句返回，而剩下两种都需要 `return TResult;`  
-`Task<TResult>` 是 `Task` 的简单扩展，而`IAsyncEnumerable<TResult>` 则必须搭配 `yield return` 返回。
-修饰了 `async` 关键字的异步方法，如果想在方法体中使用 `yield return`，则返回值必须是`IAsyncEnumerable<TResult>`
+返回值为 `void` `Task` 的异步方法，在方法体中使用空的 `return;` 语句返回，而剩下两种都需要 `return TResult;`  
+`Task<TResult>` 是 `Task` 的简单扩展，而`IAsyncEnumerable<TResult>` 则必须搭配 `yield return` 返回。同理，如果想在修饰了 `async` 关键字的异步方法中使用 `yield return`，则返回值必须是`IAsyncEnumerable<TResult>`
 
 
 ## `async` 以及 `await` 关键字
 
 `async` 及 `await` 是C#异步编程的核心，其中 `async` 定义异步方法，`await` 处理异步调用。  
 `await` 关键字只能在声明了 `async` 的异步方法中使用，用来等待一个 `Task`/`ValueTask` 完成，如果有的话把该任务的返回值作为 `await` 表达式的值。  
-在等待任务完成的时候会把控制流交回给调用方，调用方再去做其他不依赖该异步方法的任务。同理，异步方法在开始一个异步任务 `TaskA` 的时候，可以去做其他不依赖 `TaskA` 的工作。在需要其结果时，才使用 `await`
-关键字，如果 `TaskA` 也使用了 `await` 等待其他工作，那么控制流交回 `TaskA`。
+在等待任务完成的时候会把控制流交回给调用方，调用方再去做其他不依赖该异步方法的任务。同理，异步方法在开始一个异步任务 `TaskA` 的时候，可以去做其他不依赖 `TaskA` 的工作。在需要其结果时，才使用 `await` 关键字，如果 `TaskA` 也使用了 `await` 等待其他工作，那么控制流交回 `AsyncMethod`。
 
 ```C#
 public async void main() {
