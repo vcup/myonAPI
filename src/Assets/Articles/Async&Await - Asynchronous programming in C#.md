@@ -1,4 +1,4 @@
-# 异步编程与async&await关键字
+# 异步编程与`async`&`await`关键字
 
 C# 异步编程基于Task任务模型，包括异步方法 `async` `await` 关键字
 
@@ -10,7 +10,7 @@ C# 异步编程基于Task任务模型，包括异步方法 `async` `await` 关�
 ## 异步方法
 
 定义异步方法可以在声明方法时使用 `async` 关键字声明这是一个异步方法。按照约定，异步方法以Async结尾。返回值可以选用 `void` `Task` `Task<TResult>` `IAsyncEnumerable<TResult>`  
-注意，调用异步方法的那一刻就已经开始执行 `Task` 了，无需再使用 `Task.Run` 方法
+注意，调用异步方法的那一刻就已经开始执行 `Task` 了，无需再使用 `Task.Run` 方法  
 返回值为 `void` 时不能 `await`。
 
 ### 异步方法中处理异常
