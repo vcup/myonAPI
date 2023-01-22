@@ -72,32 +72,59 @@ public async Task TaskA(){
 具体操作是这样的，在原本异步方法需要使用 `await` 的地方直接 `new` 一个 `Task` 并 `return`，而返回的 `Task` 要执行的代码则是原本异步方法 `await` 的表达式及后续的所有代码  
 实际上编译器也是这样做的，修饰了 `async` 关键字的方法会告诉编译器，这个方法在遇到 `await` 关键字之后需要作特殊处理  
 
+以下展示了异步方法如果不用关键字的一般写法，控制台输出数字顺序由小到大  
+
 ```C#
-public void Main() {
+// 以下 L/P 方法仅为方便演示，实际作不存在处理
+void Main() {
     //....
+    L(0);
     var result = AsyncMethod().Result;
     // 一般提前开始任务再在需要的时候查看结果，任务未完成时调用会阻塞线程
-    Console.Write(result);
+    L(result);
 }
 
-public Task<string> AsyncMethod(){
+Task<string> AsyncMethod()
+{
+    L(1);
     var taskA = TaskA();
+    L(3);
     //....
     // 不依赖 TaskA 的工作
     // 可能与 TaskA 一起执行
     //....
-    return new Task(() => {
+    return Task.Run(() =>
+    {
+        L(4);
         taskA.Wait();
-        return "awa";
+        L(6);
+        return "done";
     });
 }
 
-public Task TaskA(){
-    Thread.Sleep(2333);
-    return new Task(() => {
+Task TaskA()
+{
+    L(2);
+    P();
+    return Task.Run(() =>
+    {
+        P(); // 如果注释掉这一句，那么 4.5 大概率先于 4 打印
+             // 因为从这里开始已经转入异步调用了，其他异步点同理
+        L(4.5);
         //....
         // 这里的代码事实上异步执行
         //....
+        P();
+        L(5);
     });
+}
+
+void L(object i)
+{
+    Console.Write(i);
+    Console.CursorLeft++;
+}
+
+void P() => Thread.Sleep(2000);
 }
 ```
