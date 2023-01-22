@@ -30,11 +30,11 @@ C# 异步编程基于Task任务模型，包括异步方法 `async` `await` 关�
 在等待任务完成的时候会把控制流交回给调用方，调用方再去做其他不依赖该异步方法的任务。同理，异步方法在开始一个异步任务 `TaskA` 的时候，可以去做其他不依赖 `TaskA` 的工作。在需要其结果时，才使用 `await` 关键字，如果 `TaskA` 也使用了 `await` 等待其他工作，那么控制流交回 `AsyncMethod`。
 
 ```C#
-public async void main() {
+public async void Main() {
     //....
     var result = await AsyncMethod();
-    // 这种写法会丧失异步编程的优势
-    // 一般提前开始任务再在需要的时候 await
+    // 一般提前开始任务再在需要的时候 await 而不是直接 await
+    // 而在有专门针对的框架如aspnet中无需担心阻塞，此时await会把任务直接交由框架托管，不会直接阻塞线程
     Console.Write(result);
 }
 
@@ -50,31 +50,32 @@ public async Task<string> AsyncMethod(){
 
 public async Task TaskA(){
     Thread.Sleep(2333);
-    //....
+    //await ....;
     // 异步工作，将使用 await 关键字
     //....
     return;
 }
 ```
 
-控制流从 `main` 方法开始，执行到异步调用，控制流进入 `AsyncMethod`，马上又会遇到一个异步方法调用，控制流再进入 `TaskA`，在TaskA遇到任何 `await` 运算符之前，这个方法是同步运行的，会阻塞控制流，遇到 `await` 之后方法会马上返回一个 `Task` 任务给调用方，即 `AsyncMethod` 转入异步执行了  
+控制流从 `main` 方法开始，执行到异步调用，控制流进入 `AsyncMethod`，马上又会遇到一个异步方法调用，控制流再进入 `TaskA`，在TaskA遇到任何 `await` 运算符之前，这个方法是同步运行的，会阻塞调用方，遇到 `await` 之后方法会马上返回一个 `Task` 任务给调用方，即 `TaskA` 转入异步执行了  
+此时 `AsyncMethod` 会继续执行后续代码，需要等待 `TaskA` 的时候再 `await`  
 
 整理一下流程，控制流从 `main` 到 `AsyncMethod` 然后开始 `TaskA`，此时如果 `TaskA` 执行到 `await`，那么控制流会返回到 `AsyncMethod` 执行不依赖 `TaskA`
 的工作  
-`TaskA` 遇到 `await` 后就转入异步执行，除非在调用方 `await` 返回的 `Task` 任务将不再阻塞 `AsyncMethod`。  
-在异步方法中，`await` 之前的代码都是同步执行的，与调用同步方法别无二致，使用await之后转入异步调用以尽可能利用更多算力资源以达到更高的性能。  
+`TaskA` 遇到 `await` 后就转入异步执行，除非在调用方 `await` 返回的 `Task` 对象将不再阻塞 `AsyncMethod`。  
 
-## `async`、`await` 关键字的原理
+在异步方法中，`await` 之前的代码都是同步执行的，与调用同步方法别无二致，使用 `await` 之后转入异步调用，即马上返回 `Task` 给调用方，调用方再执行其它任务以尽可能利用更多资源  
 
-`async` `await` 都只是语法糖，使用的时候C#编译器会额外生成代码，用户可以写出完全不使用 `async` `await` 关键字而事实上异步的方法，事实上在引入这组关键字之前人们就是这样做的  
-具体操作是这样的，在原本异步方法需要使用 `await` 的地方直接 `new` 一个 `Task`并 `return`，而返回的 `Task` 要执行的代码则是原本异步方法 `await` 的表达式及后续的所有代码  
+### 细琐 `async` `await` 关键字
+
+`async` `await` 都只是语法糖，使用的时候C#编译器会额外生成代码，用户可以写出完全不使用 `async` `await` 关键字而事实上异步的方法，事实上在引入这组关键字之前人们就已经在编写异步代码了  
+具体操作是这样的，在原本异步方法需要使用 `await` 的地方直接 `new` 一个 `Task` 并 `return`，而返回的 `Task` 要执行的代码则是原本异步方法 `await` 的表达式及后续的所有代码  
 实际上编译器也是这样做的，修饰了 `async` 关键字的方法会告诉编译器，这个方法在遇到 `await` 关键字之后需要作特殊处理  
 
 ```C#
 public void Main() {
     //....
     var result = AsyncMethod().Result;
-    // 这种写法会丧失异步编程的优势
     // 一般提前开始任务再在需要的时候查看结果，任务未完成时调用会阻塞线程
     Console.Write(result);
 }
