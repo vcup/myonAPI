@@ -1,8 +1,13 @@
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using myonAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+if (builder.Environment.IsDevelopment())
+{
+    builder.Services.AddCors(options => options.AddDefaultPolicy(new CorsPolicy { IsOriginAllowed = _ => true }));
+}
 
 builder.Services.AddControllers()
     // using Pascal Case Naming
@@ -21,6 +26,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseCors();
 }
 
 app.UseHttpsRedirection();
